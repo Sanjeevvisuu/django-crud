@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+    <h4>update</h4>
+    <form method="POST" autocomplete="off">
+      {% csrf_token %}
+      <label >name<input type="text" name="name" value="{{stu.name}}"></label>
+      <label >school<input type="text" name="school" value="{{stu.school}}"></label>
+      <label >DOB<input type="text" name="DOB" value="{{stu.DOB}}"></label>
+      <label >blood_group<input type="text" name="blood_group" value="{{stu.blood_group}}"></label>
+      <label >father_name<input type="text" name="father_name" value="{{stu.father_name}}"></label>
+      
+      <input type="submit" value="update">
+      <input type="reset" value="clear">
+    </form>
+    {% endblock %}
+</body>
+</html>

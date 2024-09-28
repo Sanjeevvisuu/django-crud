@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: django_1_crud_operation
+    ports:
+      - "8009:8009"   # our docker file port
+    volumes:
+      - Django:/code/Django
+    env_file:
+      - .env 
+    network:
+      - network_bridge
+    depends_on: # it will start after this service start 
+      - server
+  # for webserver 
+  server:
+    image: nginx:alpine
+    container_name: nginx_django
+    ports:
+      - "8080:80"  
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    network:
+      - network_bridge
+
+
+
+#define volumes
+volumes:
+  Django:
+
+
+# define network type
+networks:
+  network_bridge:
+    driver: bridge
