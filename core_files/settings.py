@@ -1,7 +1,8 @@
 
 import os
 from pathlib import Path
-
+#to import from .env file
+from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -68,12 +69,12 @@ WSGI_APPLICATION = 'core_files.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': "postgres",
-        "USER": "postgres.obzgqfyxfncjkizlstlg",
-        "PASSWORD": "gXepl6ZDpTQ2gI9M",
-        "HOST": "aws-0-ap-south-1.pooler.supabase.com",
-        "PORT": 5432
+        'ENGINE': os.getenv('db_engine'),
+        'NAME':os.getenv("db_name"),
+        "USER":os.getenv("db_username"),
+        "PASSWORD":os.getenv("db_password"),
+        "HOST": os.getenv("db_host"),
+        "PORT":os.getenv("db_port") 
     }
 }
 
