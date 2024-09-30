@@ -12,7 +12,7 @@ services:
       - Django:/code/Django
     env_file:
       - .env 
-    network:
+    networks:
       - network_bridge
     depends_on: # it will start after this service start 
       - server
@@ -24,7 +24,7 @@ services:
       - "8080:80"  
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    network:
+    networks:
       - network_bridge
 
 
