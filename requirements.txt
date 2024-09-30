@@ -2,5 +2,6 @@ Django
 djangorestframework
 python-decouple
 psycopg2-binary
-#  removed in jenkis -    psycopg2
+#  removed in jenkis -    
+psycopg2
 
