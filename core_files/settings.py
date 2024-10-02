@@ -69,12 +69,12 @@ WSGI_APPLICATION = 'core_files.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE':'django.db.backends.postgresql',
-        'NAME':os.getenv("db_name"),
-        "USER":os.getenv("db_username"),
-        "PASSWORD":os.getenv("db_password"),
-        "HOST": os.getenv("db_host"),
-        "PORT":os.getenv("db_port") 
+        'ENGINE':"django.db.backends.postgresql",
+        'NAME':'postgres',
+        "USER":'postgres',
+        "PASSWORD":'r5ZSweyis96ZBStF',
+        "HOST":'db.rulpiwescrenxhurzape.supabase.co',
+        "PORT":'5432' ,
     }
 }
 
