@@ -69,12 +69,12 @@ WSGI_APPLICATION = 'core_files.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE':"django.db.backends.postgresql",
-        'NAME':'postgres',
-        "USER":'postgres',
-        "PASSWORD":'r5ZSweyis96ZBStF',
-        "HOST":'db.rulpiwescrenxhurzape.supabase.co',
-        "PORT":'5432' ,
+        'ENGINE':'django.db.backends.mysql',
+        'NAME':'Django',
+        "USER":'admin',
+        "PASSWORD":'Admin1ooty1',
+        "HOST":'database-1.cta6y2gqcbc0.ap-south-1.rds.amazonaws.com',
+        "PORT":'3306' ,
     }
 }
 
