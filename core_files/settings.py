@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-t0#28py%9!by1m&(z0^9lm$7z-&$horq)@l2dghbp0una)+hh)'
+SECRET_KEY = os.getenv('django_crud_restapi_operation_secret_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -70,11 +70,11 @@ WSGI_APPLICATION = 'core_files.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.mysql',
-        'NAME':'Django',
-        "USER":'admin',
-        "PASSWORD":'Admin1ooty1',
-        "HOST":'database-1.cta6y2gqcbc0.ap-south-1.rds.amazonaws.com',
-        "PORT":'3306' ,
+        'NAME': os.getenv('db_name') ,
+        "USER":os.getenv('db_username'),
+        "PASSWORD":os.getenv('db_password'),
+        "HOST":os.getenv('db_host'),
+        "PORT": 3306 ,
     }
 }
 
