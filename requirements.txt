@@ -3,6 +3,6 @@ djangorestframework
 python-dotenv
 python-decouple
 psycopg2-binary
-pip install mysqlclient
+mysqlclient
 #  removed in jenkis - psycopg2
 
