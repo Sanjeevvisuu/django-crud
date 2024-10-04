@@ -25,7 +25,7 @@ VOLUME /code:/code/Django
 RUN python manage.py makemigrations && python manage.py migrate
 
 # Expose port 8009 to access the Django server from outside the container
-EXPOSE 8009
+EXPOSE 80
 
 # Start the Django development server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8009"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:80"]
