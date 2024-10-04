@@ -9,6 +9,9 @@ RUN mkdir /code
 WORKDIR /code
 COPY requirements.txt requirements.txt
 
+# Update apk repositories and install dependencies for mysql 
+RUN apk update && apk add --no-cache gcc musl-dev libffi-dev python3-dev pkgconfig mariadb-dev
+
 # Upgrade pip and install dependencies
 RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir  -r requirements.txt
 
