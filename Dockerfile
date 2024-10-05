@@ -19,7 +19,7 @@ RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir  -r r
 COPY . /code
 
 # Create a volume for Django's static files
-VOLUME /code:/code/Django
+#VOLUME /code:/code/Django i commit this because i defned in docker-compose.file
 
 # Run Django migrations
 RUN python manage.py makemigrations && python manage.py migrate
