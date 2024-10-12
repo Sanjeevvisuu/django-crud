@@ -1,6 +1,9 @@
 pipeline {
     agent any
+    environment {
+         DOCKERHUB_CREDENTIALS= credentials('dockerhub')
 
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -8,32 +11,9 @@ pipeline {
                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/Sanjeevvisuu/deploy-test.git'
             }
         }
+        
 
-        stage('Set Up Python Environment') {
-            steps {
-                script {
-                    echo 'Setting up Python environment...'
-                    sh '''
-                    python3 -m venv venv
-                    . venv/bin/activate
-                    python --version
-                    pip install -r requirements.txt
-                    '''
-                }
-            }
-        }
-
-        stage('Build') {
-            steps {
-                script {
-                    echo 'Building and running the Django application...'
-                    sh '''
-                    . venv/bin/activate
-                    python manage.py runserver 
-                    '''
-                }
-            }
-        }
+       
         stage('docker build') {
             steps {
                 script {
