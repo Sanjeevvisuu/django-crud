@@ -1,8 +1,7 @@
 Django
 djangorestframework
 python-dotenv
-#python-decouple
-#psycopg2-binary
+python-decouple
 mysqlclient
-#  removed in jenkis - psycopg2
+
 
