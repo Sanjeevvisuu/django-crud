@@ -1,44 +1,43 @@
 pipeline {
     agent any
     environment {
-         DOCKERHUB_CREDENTIALS= credentials('dockerhub')
-
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
     }
     stages {
         stage('Checkout') {
             steps {
-                " "
+                echo 'Checking out the code...'
                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/Sanjeevvisuu/deploy-test.git'
             }
         }
-        
 
-       
-        stage('docker build') {
+        stage('Docker Build') {
             steps {
                 script {
-                    echo 'Building and running the Django application as a image ...'
+                    echo 'Building the Django application as a Docker image...'
                     sh '''
-                    docker-compose build 
+                    docker-compose build
                     '''
                 }
             }
         }
-        stage('docker-image -push') {
+
+        stage('Docker Image Push') {
+            steps {
                 script {
                     echo 'Pushing application to Docker Hub...'
                     withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh '''
                         echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-                        # i created a repo in dockerhub called docker push sanjeevvisu/django:tagname
-                        docker tag latest $DOCKER_USERNAME/django
+                        # Tag and push the image
+                        docker tag django:latest $DOCKER_USERNAME/django:latest
                         docker push $DOCKER_USERNAME/django:latest
                         '''
                     }
                     echo 'Pushed application to Docker Hub.'
                 }
+            }
         }
-        
     }
 
     post {
