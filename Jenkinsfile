@@ -7,7 +7,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out the code...'
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Sanjeevvisuu/deploy-test.git'
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Sanjeevvisuu/django-crud.git'
             }
         }
 
