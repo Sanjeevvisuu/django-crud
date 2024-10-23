@@ -11,6 +11,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+#django_crud_restapi_operation_secret_key=django-insecure-to^6g#kze^w_em6%f4+e#brkl^5krp=d3b7wl#7ptmpg!1+9qy -"i removed this because in azure app service"
+
 SECRET_KEY = os.getenv('django_crud_restapi_operation_secret_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
