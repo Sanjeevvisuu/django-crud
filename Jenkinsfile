@@ -11,7 +11,7 @@ pipeline {
             }
         }
 
-        stage('Docker Build') {
+        stage('Docker  Build') {
             steps {
                 script {
                     echo 'Building the Django application as a Docker image...'
