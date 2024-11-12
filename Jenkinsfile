@@ -7,16 +7,17 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out the code...'
-               git branch: 'main', credentialsId: 'github', url: 'https://github.com/Sanjeevvisuu/django-crud.git'
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Sanjeevvisuu/django-crud.git'
             }
         }
 
-        stage('Docker  Build') {
+        stage('Docker Build') {
             steps {
                 script {
                     echo 'Building the Django application as a Docker image...'
                     sh '''
-                    docker-compose build
+                    # Ensure that the Jenkins user can access Docker (optional if sudo is configured)
+                    sudo docker-compose build
                     '''
                 }
             }
@@ -28,10 +29,11 @@ pipeline {
                     echo 'Pushing application to Docker Hub...'
                     withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh '''
-                        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+                        # Log in to Docker Hub
+                        echo "$DOCKER_PASSWORD" | sudo docker login -u "$DOCKER_USERNAME" --password-stdin
                         # Tag and push the image
-                        docker tag django:latest $DOCKER_USERNAME/django:latest
-                        docker push $DOCKER_USERNAME/django:latest
+                        sudo docker tag django:latest $DOCKER_USERNAME/django:latest
+                        sudo docker push $DOCKER_USERNAME/django:latest
                         '''
                     }
                     echo 'Pushed application to Docker Hub.'
@@ -43,7 +45,6 @@ pipeline {
     post {
         always {
             echo 'Cleaning up workspace...'
-          
         }
         success {
             echo 'Pipeline succeeded!'
