@@ -17,7 +17,7 @@ pipeline {
                     echo 'Building the Django application as a Docker image...'
                     sh '''
                     # Ensure that the Jenkins user can access Docker (optional if sudo is configured)
-                    sudo docker-compose build
+                        docker-compose build
                     '''
                 }
             }
