@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 #to import from .env file
 from dotenv import load_dotenv
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -69,16 +70,20 @@ WSGI_APPLICATION = 'core_files.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
-        'ENGINE':'django.db.backends.mysql',
-        'NAME': os.getenv('db_name') ,
-        "USER":os.getenv('db_username'),
-        "PASSWORD":os.getenv('db_password'),
-        "HOST":os.getenv('db_host'),
-        "PORT": 3306 ,
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('db_name'),
+        'USER': os.getenv('db_username'),
+        'PASSWORD': os.getenv('db_password'),
+        'HOST': os.getenv('db_host'),
+        'PORT': 3306,
+
     }
 }
+
 
 
 # Password validation

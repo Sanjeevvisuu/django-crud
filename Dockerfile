@@ -1,31 +1,39 @@
 # Pull the Python base image
-FROM python:alpine
+FROM python:3.13-alpine
 
+# Set environment variables to avoid writing pyc files and set the default locale
+ENV PYTHONUNBUFFERED=1
+ENV LANG=C.UTF-8
 
-#it create a directory in run time 
+# Create a directory for the application code inside the container
 RUN mkdir /code
-
-# Set the working directory in the container
 WORKDIR /code
-COPY requirements.txt requirements.txt
 
-# Update apk repositories and install dependencies for mysql 
-RUN apk update && apk add --no-cache gcc musl-dev libffi-dev python3-dev pkgconfig mariadb-dev
+# Copy the requirements file and install system dependencies for MySQL
+COPY requirements.txt /code/
 
-# Upgrade pip and install dependencies
-RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir  -r requirements.txt
+# Update apk repositories and install build dependencies for MySQL
+RUN apk update && apk add --no-cache \
+    gcc \
+    musl-dev \
+    libffi-dev \
+    python3-dev \
+    pkgconfig \
+    mariadb-dev \
+    && rm -rf /var/cache/apk/*  # Clean up apk cache
 
-# Copy the project files from the host to the container
-COPY . /code
+# Install Python dependencies
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
 
-# Create a volume for Django's static files
-#VOLUME /code:/code/Django i commit this because i defned in docker-compose.file
+# Copy the rest of the application code into the container
+COPY . /code/
 
-# Run Django migrations
-RUN python manage.py makemigrations && python manage.py migrate
+# Install python-dotenv to load environment variables from .env file
+RUN pip install python-dotenv
 
-# Expose port 8009 to access the Django server from outside the container
+# Expose the port on which Django will run
 EXPOSE 8009
 
-# Start the Django development server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8009"]
+# Set the entry point to run the Django development server with migrations
+CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8009"]
