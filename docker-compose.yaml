@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: django
     container_name: django_1_crud_operation
     ports:
       - "8009:8009"   # our docker file port
