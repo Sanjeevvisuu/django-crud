@@ -30,10 +30,10 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh '''
                         # Log in to Docker Hub
-                        echo "$DOCKER_PASSWORD" | sudo docker login -u "$DOCKER_USERNAME" --password-stdin
+                        echo "$DOCKER_PASSWORD" |  docker login -u "$DOCKER_USERNAME" --password-stdin
                         # Tag and push the image
-                        sudo docker tag django:latest $DOCKER_USERNAME/django:latest
-                        sudo docker push $DOCKER_USERNAME/django:latest
+                           docker tag django:latest $DOCKER_USERNAME/django:latest
+                           docker push $DOCKER_USERNAME/django:latest
                         '''
                     }
                     echo 'Pushed application to Docker Hub.'
