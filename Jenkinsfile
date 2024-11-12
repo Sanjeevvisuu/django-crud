@@ -32,7 +32,7 @@ pipeline {
                         # Log in to Docker Hub
                         echo "$DOCKER_PASSWORD" |  docker login -u "$DOCKER_USERNAME" --password-stdin
                         # Tag and push the image
-                           docker tag django:latest $DOCKER_USERNAME/django:latest
+                           docker tag django $DOCKER_USERNAME/django:latest
                            docker push $DOCKER_USERNAME/django:latest
                         '''
                     }
